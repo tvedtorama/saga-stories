@@ -1,7 +1,7 @@
-import { take, fork, cancel, put, select, actionChannel } from "redux-saga/effects";
+import { take, fork, cancel, put, select } from "redux-saga/effects";
 import { SET_EVENT_DATA } from "./actions/eventData";
 import { Task, delay } from "redux-saga";
-import * as Ix from 'ix'
+import Ix from "@reactivex/ix-es5-cjs/Ix";
 import { Action } from "redux";
 import { deleteStoryItem, STORE_STORY_ITEM, IStoreStoryItemAction, DELETE_STORY_ITEM } from "./actions/storyItem";
 import { NOP } from "./actions/nop";
@@ -21,7 +21,7 @@ export interface IStoryRunnerProvider {
 	getStory: (es: StoryAnim.IEventState) => IStoryIterator
 	/** Returns missing children for the given status, taking a `IStoryRunnerChildrenStatus`.  Should perhps be a
 	 * regular function, unless we want to make sure some children are created only once. */
-	getChildrenIterator: () => IChildrenIterator
+	getChildrenIterator?: () => IChildrenIterator
 }
 export interface IStoryRunnerChildrenStatus {
 	running: string[]
@@ -41,7 +41,7 @@ const getActualRunningChildren = (runningIterators: {[id: string]: Task}) =>
 	Object.keys(runningIterators).filter(k => runningIterators[k].isRunning())
 
 /** This is used around the place since generators don't receive anything until they yield,
- * hence we have to call the twice on first iteration. **Bad stuff** */
+ * hence we have to call it twice on first iteration. **Bad stuff!** */
 const takeTwoOnFirst = (isFirst) => Ix.Iterable.range(0, isFirst ? 2 : 1)
 
 /** Calls the children iteratior, two times the first time, to initialize it.
@@ -77,7 +77,7 @@ const isDeleteAction = (a: Action): a is IStoreStoryItemAction => a.type === DEL
 export const storyRunner = function*(storyData: IStoryRunnerProvider, eventData?: StoryAnim.IEventData, itemRegistryInput?: CreatedItemRegistry) {
 	const itemRegistry = itemRegistryInput || new CreatedItemRegistry()
 	const genIterator = getStoryWhenItsTime(storyData)
-	const childIterator = storyData.getChildrenIterator()
+	const childIterator = storyData.getChildrenIterator ? storyData.getChildrenIterator() : (function*() {})()
 	const eventDataGenerator = produceYieldableEventData(eventData)
 	const actionOwners = {owners: [storyData.id]}
 	let runningChildren: {[id: string]: Task} = {}

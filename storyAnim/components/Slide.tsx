@@ -3,7 +3,7 @@ import { IItemFactory } from './factoryContext';
 
 export const SLIDE_COMPONENT = "SLIDE"
 
-export type ISlideProps = {text: string} | {slide: string, factory: IItemFactory, props?: any}
+export type ISlideProps = {text: string} | {slide: string, factory?: IItemFactory, props?: any}
 
 /** Hosts a html slide.
  *

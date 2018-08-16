@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "declaration": true,
         "jsx": "react", // this line causes problems with the exports of the State class, but only when placed out of order!!!!! Seems this crap needs to be in order....
         "module": "CommonJS",
         "moduleResolution": "node",
@@ -14,6 +15,7 @@
         "!./node_modules/**"
     ],
     "exclude": [ 
-        "node_modules"
+        "node_modules",
+        "build"
     ]
 }

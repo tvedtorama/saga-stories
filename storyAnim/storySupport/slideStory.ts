@@ -2,7 +2,6 @@ import { ISlideProps } from "../components/Slide";
 import { NOP } from "../actions/nop";
 import { IStoryRunnerYieldFormat } from "../storyRunner";
 import { storeStoryItem } from "../actions/storyItem";
-import { ISlideKey } from "../../app/components/slides";
 
 export const slideStoryInnerDefault = function*() {
 	yield {}
@@ -14,8 +13,8 @@ export const slideStoryInnerDefault = function*() {
  *
  * Returns a method that can be called to generate the actual story.
  */
-export const slideStoryImpl = (idAndParent: {id: string, parentId: string}, internalGen = slideStoryInnerDefault()) =>
-	(existenceCheck: (s: StoryAnim.IEventState) => boolean, slideText: string | {s: ISlideKey}, position: StoryAnimDataSchema.IItemPosition = {}, small = false) =>
+export const slideStoryImpl = <TSlideKey extends string>(idAndParent: {id: string, parentId: string}, internalGen = slideStoryInnerDefault()) =>
+	(existenceCheck: (s: StoryAnim.IEventState) => boolean, slideText: string | {s: TSlideKey}, position: StoryAnimDataSchema.IItemPosition = {}, small = false) =>
 	function*() {
 		const internalGenProps = internalGen.next().value
 		const getStoryItemToStore = (internalGenProps) => storeStoryItem({

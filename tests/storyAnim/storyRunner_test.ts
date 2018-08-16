@@ -6,7 +6,7 @@ import { delay } from 'redux-saga';
 import { IStoryRunnerProvider, storyRunner, IStoryRunnerChildrenStatus, IStoryRunnerYieldFormat } from '../../storyAnim/storyRunner';
 import { SET_EVENT_DATA } from '../../storyAnim/actions/eventData';
 import { combineReducers } from 'redux';
-import { storyAppReducers } from '../../storyAnim/reducers';
+import { sagaStoriesReducers } from '../../storyAnim/reducers';
 import { STORE_STORY_ITEM, DELETE_STORY_ITEM, deleteStoryItem } from '../../storyAnim/actions/storyItem';
 import { NOP } from '../../storyAnim/actions/nop';
 
@@ -15,7 +15,7 @@ chai.should()
 describe("storyRunner", () => {
 	const startMeUp = () => {
 		const initialState = {}
-		const createSagaTester = (logger = (...args) => {}) => new SagaTester({initialState, reducers: combineReducers(storyAppReducers), options: {logger}})
+		const createSagaTester = (logger = (...args) => {}) => new SagaTester({initialState, reducers: combineReducers(sagaStoriesReducers), options: {logger}})
 		const tester = createSagaTester()
 		return {tester}
 	}
