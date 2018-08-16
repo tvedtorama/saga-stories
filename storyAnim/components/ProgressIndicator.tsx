@@ -25,10 +25,12 @@ export const PROGRESS_INDICATOR = "PROGRESS_INDICATOR"
 const circRad = 100
 const borderExtra = 1.25
 const interestWidth = 15
+const bigScale = 1.2
+const smallScale = 0.6
 
 const getScaleTranslate = (scale) =>
-	[{x: -svgCoords.x - circRad * scale * borderExtra, y: svgCoords.y + circRad * scale * borderExtra}].
-	map(({x, y}) => `translate(${x} ${y}) scale(${scale})`)
+	[{x: svgCoords.x + circRad * scale * borderExtra, y: svgCoords.y + circRad * scale * borderExtra}].
+	map(({x, y}) => `translate(${x} ${y}) scale(${scale}) translate(${(bigScale - scale) * circRad / (bigScale - smallScale)} ${0})`)
 	[0]
 
 export interface IProgressIndicatorProps {
@@ -78,7 +80,7 @@ export class ProgressIndicatorRaw extends React.Component<IProgressIndicatorProp
 
 
 	render() {
-		const scale = this.state.hot ? 1.2 : 0.6;
+		const scale = this.state.hot ? bigScale : smallScale;
 		const {interestPoints} = this.props
 		return [
 			<defs key="defs">
