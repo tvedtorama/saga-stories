@@ -7,7 +7,7 @@
 	"repository": "tvedtorama/saga-stories",
 	"scripts": {
 		"build": "tsc",
-		"test": "mocha --require source-map-support/register $(find build/tests -name '*.js')"
+		"test": "mocha --require source-map-support/register $(find build/tests -name '*.js') --reporter spec"
 	},
 	"author": "",
 	"license": "ISC",
