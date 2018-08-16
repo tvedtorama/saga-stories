@@ -6,8 +6,8 @@
 	"types": "build/index.d.ts",
 	"repository": "tvedtorama/saga-stories",
 	"scripts": {
-		"test": "mocha --require source-map-support/register $(find build/tests -name '*.js')",
-		"build": "tsc"
+		"build": "tsc",
+		"test": "mocha --require source-map-support/register $(find build/tests -name '*.js')"
 	},
 	"author": "",
 	"license": "ISC",
