@@ -1,0 +1,6 @@
+{
+	"name": "saga-stories/utils",
+	"private": true,
+	"main": "../build/utilsShared.js",
+	"types": "../build/utilsShared.d.ts"
+  }

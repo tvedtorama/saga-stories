@@ -1,7 +1,7 @@
 import { take, fork, cancel, put, select } from "redux-saga/effects";
 import { SET_EVENT_DATA } from "./actions/eventData";
 import { Task, delay } from "redux-saga";
-import Ix from "@reactivex/ix-es5-cjs/Ix";
+import Ix from "@reactivex/ix-es5-cjs"
 import { Action } from "redux";
 import { deleteStoryItem, STORE_STORY_ITEM, IStoreStoryItemAction, DELETE_STORY_ITEM } from "./actions/storyItem";
 import { NOP } from "./actions/nop";

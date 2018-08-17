@@ -1,0 +1,6 @@
+{
+	"name": "saga-stories/components",
+	"private": true,
+	"main": "../build/compShared.js",
+	"types": "../build/compShared.d.ts"
+  }

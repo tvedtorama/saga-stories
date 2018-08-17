@@ -1,4 +1,4 @@
-import Ix from "@reactivex/ix-es5-cjs/Ix";
+import Ix from "@reactivex/ix-es5-cjs"
 import { isUndefined, isFiniteNumber } from "../lowLevelUtils";
 
 const getNumberWithDefault = (defaultValue: number, animStateValue?: number) =>

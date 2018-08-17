@@ -1,4 +1,4 @@
-import Ix from "@reactivex/ix-es5-cjs/Ix";
+import Ix from "@reactivex/ix-es5-cjs"
 
 const allButTheOne = (items, id) => items.filter(x => x !== id)
 
