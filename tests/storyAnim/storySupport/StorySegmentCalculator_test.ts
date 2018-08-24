@@ -34,4 +34,17 @@ describe("StorySegmentCalculator", () => {
 		seg4.validFunc()(cPos(99)).should.equal(true)
 		seg4.validFunc()(cPos(100)).should.equal(false)
 	})
+
+	it("should roll out metas", () => {
+		const calc = new StorySegmentCalculator()
+
+		const seg1 = calc.addSegment(10)
+		const seg2 = calc.addSegment(4, 4)
+		const seg3 = calc.addSegment(5, 10)
+		const seg4 = calc.addSegment(10)
+
+		seg1.meta().startPos.should.equal(0)
+		seg4.meta().startPos.should.equal(60) // 25 units in total, seg4 starts at 15: 15 / 25 = 60%
+	})
+
 })
